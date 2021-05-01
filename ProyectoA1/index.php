@@ -16,9 +16,9 @@ session_start();
 <body>
 	
 
+<!--Nav -->
 
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light mt-4">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mt-4" id="Inicio">
 
 
   <div class="container-fluid ">
@@ -57,7 +57,7 @@ session_start();
 </form>
 
       </div>
-      
+      <!--Registro dentro del modal -->
       <form action="Registro.php">
       <div class="modal-footer">
         <p>Algunas funcionalidades de esta pagina web estan solo disponibles para usuarios registrados. Crea una cuenta ahora y obten acceso a las paginas protegidas de esta web</p>
@@ -81,13 +81,13 @@ session_start();
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item ">
-          <a class="nav-link " aria-current="page" href="#">Inicio</a>
+          <a class="nav-link " aria-current="page" href="#Inicio">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Nuestras Rutas</a>
+          <a class="nav-link" href="#Destinos">Nuestras Rutas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contactos</a>
+          <a class="nav-link" href="#Contactos">Contactos</a>
         </li>
        
       </ul>
@@ -99,12 +99,15 @@ session_start();
   </div>
 </nav>
 
+
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
    <text x="680" y="100" font-size="4em" font-weight="2em" letter-spacing="1em">RIKLINSUS</text>
   <path fill="#0099ff" fill-opacity="1" d="M0,32L30,48C60,64,120,96,180,96C240,96,300,64,360,58.7C420,53,480,75,540,122.7C600,171,660,245,720,245.3C780,245,840,171,900,165.3C960,160,1020,224,1080,250.7C1140,277,1200,267,1260,250.7C1320,235,1380,213,1410,202.7L1440,192L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path>
 </svg>
 
-<div class="p-4">
+
+<!--Contenido o section -->
+<div class="p-4" id="Destinos">
   <h1>
   	Destinos mas buscados
   </h1>
@@ -202,9 +205,75 @@ session_start();
 </div>
 
 
-<hr>
-<br>
-<hr>
+<hr id="Contactos">
+<!--Footer -->
+
+<div class="row g-4  m-4 pb-3 d-flex justify-content-center" style="border:1px solid blue;">
+    <div class="col-sm-4 ">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Ubicacion</h5>
+                
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3937.422243456746!2d-75.39448358621696!3d9.295802393336057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e5914520ac1258b%3A0x80b48b7976601f5f!2sCorposucre!5e0!3m2!1ses!2sco!4v1619670410718!5m2!1ses!2sco" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+              
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-sm-4 ">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Contacto</h5>
+                <div> 
+                <strong>Reservas</strong>
+                <p>
+                  #Numero de contacto
+                  # direccion de correo
+                 </p> 
+                </div>
+                <div>
+                <strong>Riklinsus</strong>
+                <p>
+                  Direccion calle # 
+                  <br>
+                  Sincelejo Sucre
+                </p>
+                </div>
+                <div>
+                <strong>Horarios</strong>
+                <p>
+                  Lunes A viernes 6am : 6pm
+                  <br>
+                  Sabados y domingos 8am : 4pm 
+
+                </p>
+              </div>
+               
+                
+            </div>
+        </div>
+    </div>
+    
+     <div class="col-sm-4 " >
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Redes Sociales</h5>
+                <i class="fab fa-whatsapp-square"></i>
+                <i class="fab fa-facebook-square"></i>
+                <i class="fab fa-instagram-square"></i>
+                
+            </div>
+        </div>
+    </div>
+        
+</div>
+
+<div class="row  m-4 pb-3" id="contacto" style="border:1px solid yellow;">
+    <div class=" pt-4 d-flex justify-content-center" >
+        <p> &copyCopyright2021 - Riklinsus</p>
+    </div>
+    
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>

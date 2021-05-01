@@ -15,24 +15,9 @@ $stmt->execute();
 
 $registros=$stmt->fetchAll();
 
-echo $usuario."<br>";
+// echo $usuario."<br>";
+// echo print_r($registros);
 
-echo print_r($registros);
-
-// echo $usuario;
-// 	$sql="UPDATE registro SET clave='$clave'  WHERE usuario='$usuario' and correo='$usuario'";
-// 	$stmt=$pdo->prepare($sql);
-
-// 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
-
-// 	$stmt->execute([
-		
-// 		'clave'=>$clave
-
-// 		]);
-
-// 	$correo=$stmt->fetch();
-// 	echo "<script> alert('Clave cambiada con exito!'); window.location.href='index.html'; </script>" ;
 
 ?>
 
@@ -46,9 +31,9 @@ echo print_r($registros);
 	<title>Editando</title>
 </head>
 <body>
-	<h1> Editado </h1>
+	<!-- <h1> Editado </h1>
 		
-<hr>
+<hr> --><!-- 
 
 		<table  border="1" class="table">
 	<thead>
@@ -82,15 +67,21 @@ echo print_r($registros);
 	</tr>
 	<?php endforeach; ?> 
 </tbody>
-</table>
-<hr>
+</table> -->
 
 
-	<a href="../Acceso.php"> Regresar </a>
+<div class="p-3 d-flex justify-content-end"> 
+        <form method="POST" action="../Acceso.php" >
+            <input type="submit" name="" value="Regresar">
+            
+        </form>
+        </div>
+        
+	
 
 <div class="d-flex justify-content-center col-19 " >
                          
-    <form class="p-5 m-3 w-50" action="Modificar.php" method="POST">
+    <form class="p-2 m-2 w-50" action="Modificar.php" method="POST">
 
         <h1 class="m-4">Edicion</h1>
         <div >
@@ -145,11 +136,3 @@ echo print_r($registros);
 </html>
 
 
-	<!-- $sql="UPDATE registros SET clave='$clave'  WHERE usuario='$usuario' and correo='$correo'";
-	$stmt=$pdo->prepare($sql);
-	$stmt->setFetchMode(PDO::FETCH_ASSOC);
-	$stmt->execute([
-		'clave'=>$clave
-		]);
-	$correo=$stmt->fetch();
-	echo "<script> alert('Clave cambiada con exito!'); window.location.href='index.html'; </script>" ; -->

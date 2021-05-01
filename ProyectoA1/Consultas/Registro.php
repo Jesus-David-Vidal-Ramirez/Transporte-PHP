@@ -1,7 +1,6 @@
 <?php
 require_once'../Conexiones/conexion.php';
 
-//$sql = "SELECT * FROM registro";
 
 $Usuario=$_POST["Usuario"];
 $Password=$_POST["Password"];
@@ -32,14 +31,10 @@ if($stmt->execute([
 	window.location.href='../index.php';
 </script>" ;
 
-	
-	//header("location:Index.html");
 }
+
 else{
- 	echo"";
  	echo "<script> alert('Usuario ya definido Ingrese otro usuario'); window.location.href='../Registro.php'; </script>";
-// 	//$_SESSION["Logueado"]=!true;
- 	
  }
 
 ?>

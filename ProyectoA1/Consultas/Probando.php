@@ -1,10 +1,8 @@
 <?php
 
-//require_once'../Conexiones/conexion.php';
  require_once ('../Conexiones/conexion.php');
 
 	session_start();
-
 	$Usuario = $_POST["Usuario"];
 	$Password = $_POST["Password"];
 		             
@@ -23,9 +21,6 @@
 
 	$dato=$stmt->fetch();
 
-
-		
-	
 	if($dato){
 
 		echo $dato;
@@ -40,8 +35,6 @@
 		echo "<script> alert('Usuario incorrecto ');
 			window.location.href='../index.php';	
 		</script>" ;
-		//window.location.href='../index.php';
-		//header("location: ../index.php");
 
 	}
 
