@@ -15,8 +15,7 @@ $stmt->execute();
 
 $registros=$stmt->fetchAll();
 
-// echo $usuario."<br>";
-// echo print_r($registros);
+
 
 
 ?>
@@ -31,53 +30,21 @@ $registros=$stmt->fetchAll();
 	<title>Editando</title>
 </head>
 <body>
-	<!-- <h1> Editado </h1>
-		
-<hr> --><!-- 
 
-		<table  border="1" class="table">
-	<thead>
-
-		
-		<th>Usuario</th>
-		<th>Password</th>
-		<th>Nombre</th>
-		<th>Identificacion</th>
-		<th>Telefono</th>
-		<th>Direccion</th>
-		<th>Rol</th>
-				
- 
-
-	</thead>
-	<tbody>
 		<?php foreach ($registros as  $registro): ?>
-<tr>
+
 	 
-	<td> <?php echo $registro[ 'Usuario']  ?></td> 	
-	<td> <?php echo $registro[ 'Password']  ?></td> 	
-	<td> <?php echo $registro[ 'Nombre']  ?></td> 	
-	<td> <?php echo $registro[ 'Identificacion']  ?></td> 
-	<td> <?php echo $registro[ 'Telefono']  ?></td> 
-	<td> <?php echo $registro[ 'Direccion']  ?></td> 
-	<td> <?php echo $registro[ 'Rol']  ?></td> 
+	
 
                  
               
-	</tr>
+
 	<?php endforeach; ?> 
-</tbody>
-</table> -->
 
 
-<div class="p-3 d-flex justify-content-end"> 
-        <form method="POST" action="../Acceso.php" >
-            <input type="submit" name="" value="Regresar">
-            
-        </form>
-        </div>
-        
-	
+
+<a href="../Acceso.php" class="btn btn-outline-secondary border-3 mt-3 mx-4"> Regresar </a>
+	<hr>
 
 <div class="d-flex justify-content-center col-19 " >
                          
@@ -123,7 +90,7 @@ $registros=$stmt->fetchAll();
             <label for="formFile" class="form-label">Rol</label>
             <input class="form-control" type="text"  name="Rol" id="formFile" value=" <?php echo $registro[ 'Rol']  ?>">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary w-50">Submit</button>
 
     </form>
 </div>

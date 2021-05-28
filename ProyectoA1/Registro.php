@@ -11,7 +11,7 @@
 <body>
 	
 
-	<a href="index.php"> Regresar </a>
+<a href="./index.php" class="btn btn-outline-secondary border-3 mt-3 mx-4"> Regresar </a>
 
 <div class="d-flex justify-content-center col-19 " >
                          
@@ -28,7 +28,7 @@
         </div>
         <div>
             <label for="password" class="form-label">Nombre</label>
-            <input type="password" name="Nombre" class="form-control " id="password" required="true">
+            <input type="text" name="Nombre" class="form-control " id="password" required="true">
         </div>
 
         <div class="mb-3">

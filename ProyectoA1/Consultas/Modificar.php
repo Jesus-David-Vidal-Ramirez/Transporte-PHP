@@ -25,8 +25,9 @@
 
 	$Usuario=$stmt->fetch();
 
-	echo "<script> alert('Clave cambiada con exito!'); window.location.href='../Acceso.php'; </script>" ;
+	echo "<script> alert(' Exito!'); window.location.href='../Acceso.php'; </script>" ;
 	
+
 
 
 ?>

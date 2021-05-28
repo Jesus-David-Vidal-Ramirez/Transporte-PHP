@@ -132,6 +132,8 @@
     </form>
    <div class="p-5 m-3 w-50 d-flex align-items-center">
    	<button>Agregar</button>
+
+   	
    	<button>Agregar</button>
    	<button>Agregar</button>
    	<button>Agregar</button>

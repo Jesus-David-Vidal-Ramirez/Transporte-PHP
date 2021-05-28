@@ -3,18 +3,17 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-	<meta charset="UTF-8">
+  <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Transporte</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
- 
+  
  <!--AOS <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">-->
 </head>
 <body>
-	
 
 <!--Nav -->
 
@@ -46,7 +45,7 @@ session_start();
 		  </div>
 		  <div class="mb-3">
 		    <label for="exampleInputPassword1" class="form-label">Password</label>
-		    <input type="text" name="Password" class="form-control" id="exampleInputPassword1" required="" placeholder="Contraseña">
+		    <input type="Password" name="Password" class="form-control" id="exampleInputPassword1" required="" placeholder="Contraseña">
 		  </div>
   <!-- <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -114,13 +113,54 @@ session_start();
 </div>
 
 
+<!--- RUTAS DESDE LA BD -->
+
+
 <div class="row row-cols-1 row-cols-md-3 g-4  m-2 ">
+
+<?php
+
+require_once('./Consultas/SelectRutas.php');
+
+?>
+
+ <?php foreach ($rutas as  $ruta): ?>
+
+ <div class="col">
+    <div class="card">
+      <img src="Imagenes/<?php echo $ruta['Imagen']  ?>" class="card-img-top" alt="<?php echo $ruta[ 'Imagen']  ?>" width="1200px" height="310px">
+      <div class="card-body">
+        <h5 class="card-title"> <?php echo $ruta[ 'Nombre']  ?> </h5>
+        <p class="card-text">
+         <?php echo $ruta[ 'Info']  ?>
+        </p>
+       
+      </div>
+      <div class="card-footer d-flex justify-content-between"   >
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Comprar</button>
+        <strong calss="pl-2"><?php echo $ruta[ 'Precio']  ?></strong>
+        
+       <button class="btn btn-warning align-items-start" data-bs-toggle="modal" data-bs-target="#exampleModal">Reservar</button>
+      </div>
+    </div>
+  </div>
+  <?php endforeach; ?> 
+</div>
+
+
+<!-- 
+
+
+<div class="row row-cols-1 row-cols-md-3 g-4  m-2 ">
+
   <div class="col">
     <div class="card">
       <img src="Imagenes/Sincelejo.png" class="card-img-top" alt="Sincelejo">
       <div class="card-body">
         <h5 class="card-title">Sincelejo - Sucre</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text">
+          Sincelejo es una ciudad del norte de Colombia conocida por su festival de corridas de toros Corralejas y su patrimonio musical. En el corazón de la ciudad, se encuentra la Catedral de San Francisco de Asís, del siglo XIX, frente al Parque Santander. La Plaza de Majagual, con un diseño de mosaicos, le da su nombre a varias canciones populares y a la banda colombiana Los Corraleros de Majagual.
+        </p>
        
       </div>
       <div class="card-footer d-flex justify-content-between"   >
@@ -133,11 +173,14 @@ session_start();
   </div>
 
  <div class="col">
-    <div class="card data-aos="fade-right"">
-      <img src="Imagenes/Monteria.png" class="card-img-top" alt="Monteria">
+    <div class="card "> 
+      <img src="Imagenes/Monteria.png" class="card-img-top" alt="Monteria" width="1200px" height="330px">
       <div class="card-body">
         <h5 class="card-title">Monteria - Cordoba</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text">
+          Montería es una ciudad del norte de Colombia. Es conocida por su cultura ganadera y los planchones (balsas techadas) que transportan a los pasajeros a través del río Sinú. El frondoso Parque Ronda del Sinú se extiende a lo largo del río, con senderos y monos, iguanas y perezosos. En el área norte del parque, se encuentra la torre El Mirador, con vista panorámica del río.
+
+        </p>
        
       </div>
       <div class="card-footer d-flex justify-content-between"   >
@@ -150,11 +193,13 @@ session_start();
   </div>
 
   <div class="col">
-    <div class="card data-aos="fade-right"">
-      <img src="Imagenes/Barranquilla.png" class="card-img-top" alt="Barranquilla">
+    <div class="card ">
+      <img src="Imagenes/Barranquilla.png" class="card-img-top" alt="Barranquilla" width="1200px" height="330px">
       <div class="card-body">
         <h5 class="card-title">Barranquilla - Atlantico</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text">
+          Barranquilla, es la capital del departamento Atlántico de Colombia y es un desbordante puerto marino, bordeado por el río Magdalena. La ciudad es conocida por su enorme Carnaval, que reúne a artistas con extravagantes disfraces, carros elaborados y música cumbia, En el elegante vecindario El Prado, el Museo Romántico exhibe artefactos de festivales, y muchos lugares mas.
+        </p>
        
       </div>
       <div class="card-footer d-flex justify-content-between"   >
@@ -171,7 +216,9 @@ session_start();
       <img src="Imagenes/Cali.png" class="card-img-top" alt="Cali">
       <div class="card-body">
         <h5 class="card-title">Cali - Valle del cauca</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text">
+        Cali es una ciudad colombiana ubicada en el departamento del Valle del Cauca, al suroeste de Bogotá. Es conocida por el baile de la salsa, del que hay muchos clubes en el suburbio de Juanchito. En el barrio más antiguo de Cali, la catedral neoclásica de San Pedro alberga pinturas de la Escuela de Quito.......!!!!!
+      .</p>
        
       </div>
       <div class="card-footer d-flex justify-content-between"   >
@@ -188,7 +235,9 @@ session_start();
       <img src="Imagenes/Medellín.png" class="card-img-top" alt="Medellin">
       <div class="card-body">
         <h5 class="card-title">Medellin - Antioquia</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text">
+          Medellín es la capital de la provincia montañosa de Antioquia en Colombia. Es apodada la "Ciudad de la eterna primavera" por su clima templado y alberga la famosa Feria de las Flores anual. El moderno Metrocable conecta la ciudad con los barrios circundantes y tiene vistas del Valle de Aburrá que se encuentra debajo.
+        </p>
        
       </div>
       <div class="card-footer d-flex justify-content-between"   >
@@ -200,19 +249,38 @@ session_start();
     </div>
   </div>
 
+  <div class="col">
+    <div class="card ">
+      <img src="Imagenes/Coveñas.jpeg" class="card-img-top" alt="Coveña" width="1200px" height="310px">
+      <div class="card-body">
+        <h5 class="card-title">Sincelejo - Coveña</h5>
+        <p class="card-text">
+          Coveñas es una ciudad turística del Golfo de Morrosquillo en el norte de Colombia. Es conocida por sus largas playas con aguas tranquilas y poco profundas. La playa Primera Ensenada es un centro de deportes acuáticos. Al noreste de la ciudad, la Ciénaga de la Caimanera es una laguna costear con abundante fauna y una reserva natural con mangles
+        </p>
+       
+      </div>
+      <div class="card-footer d-flex justify-content-between"   >
+        <button class="btn btn-danger ">Comprar</button>
+        <strong calss="pl-2">30.000 COP</strong>
+        
+       <button class="btn btn-warning align-items-start">Reservar</button>
+      </div>
+    </div>
+  </div>
+
 
 
 </div>
-
+-->
 
 <hr id="Contactos">
 <!--Footer -->
 
-<div class="row g-4  m-4 pb-3 d-flex justify-content-center" style="border:1px solid blue;">
+<div class="row g-4  m-4 pb-3 d-flex justify-content-center">
     <div class="col-sm-4 ">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Ubicacion</h5>
+                <h5 class="card-title text-center m-4">Ubicacion</h5>
                 
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3937.422243456746!2d-75.39448358621696!3d9.295802393336057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e5914520ac1258b%3A0x80b48b7976601f5f!2sCorposucre!5e0!3m2!1ses!2sco!4v1619670410718!5m2!1ses!2sco" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
               
@@ -223,18 +291,20 @@ session_start();
     <div class="col-sm-4 ">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Contacto</h5>
+              
+                <h5 class="card-title text-center">Contacto</h5>
+          
                 <div> 
                 <strong>Reservas</strong>
                 <p>
-                  #Numero de contacto
-                  # direccion de correo
+                     +57 323 2265283 <br>
+                  +57 301 5977587<br>
                  </p> 
                 </div>
                 <div>
                 <strong>Riklinsus</strong>
                 <p>
-                  Direccion calle # 
+                  Ave. 22-89, Cra. 17 #22-1
                   <br>
                   Sincelejo Sucre
                 </p>
@@ -256,24 +326,30 @@ session_start();
     
      <div class="col-sm-4 " >
         <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Redes Sociales</h5>
-                <i class="fab fa-whatsapp-square"></i>
-                <i class="fab fa-facebook-square"></i>
-                <i class="fab fa-instagram-square"></i>
-                
+            <div class="card-body align-items-end">
+                <h5 class="card-title text-center">Redes Sociales</h5>
+                <div class="text-center">
+                  <a href="#" title="Whatsapp" >
+                    <i class="fab fa-whatsapp-square fa-7x"></i><br> </a>
+                  <a href="#" title="Facebook"><i class="fab fa-facebook-square fa-7x"></i><br> </a>
+                  <a href="#" title="Instagram"> <i class="fab fa-instagram-square fa-7x"> </i><br> </a>
+                  
+                  
+                </div>
             </div>
         </div>
     </div>
         
 </div>
 
-<div class="row  m-4 pb-3" id="contacto" style="border:1px solid yellow;">
+<div class="row  m-4 pb-3" id="contacto" >
     <div class=" pt-4 d-flex justify-content-center" >
         <p> &copyCopyright2021 - Riklinsus</p>
     </div>
     
 </div>
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
