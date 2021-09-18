@@ -5,7 +5,7 @@ session_start();
 
 	if(!isset($_SESSION['Usuario'])):
 	//if(!$_SESSION['Usuario']):
-
+		
 ?>
 
 <script>
@@ -13,13 +13,12 @@ session_start();
 	window.location.href="index.php";
 </script>
 
+
+
 <?php
 	
 	endif;
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,30 +29,35 @@ session_start();
 	<link rel="stylesheet" type="text/css" href="./CSS/estilos.css">
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"> 
 	<title>Administrador</title>
-</head>
-<body >	
+	<link rel="stylesheet" type="text/css" href="./CSS/estilos.css">
 	
+</head>
+<body class="acceso" >	
+<div class="container d-flex justify-content-between align-items-center mt-5"  >  
+		<div class="">
+			<form method="POST" action="logout.php">
+				<input type="submit" name="cerrarsesion" value="Cerrar session" class="btn btn-outline-danger border-2 ">
+			</form>
+		</div>
+		<div class="ms-2">	
+			<h1 class="text-primary text-center">
+				<i>Usuario: <?php echo $_SESSION['Usuario'] ?></i>
+			</h1>
+			
+		</div>	
 
-<div class="container-fluid">
-		
+</div>
 
-		<form method="POST" action="logout.php" class="d-flex justify-content-end" >
-			<input type="submit" name="" value="Cerrar session" class="btn btn-outline-danger border-2 mt-5 me-5">
-		</form>
+<div class="container">
+		<hr>
 		
-
-		<h1 style="margin-top: -50px;" class="text-primary mx-5">
-			<i>
-			Usuario: <?php echo $_SESSION['Usuario'] ?></i>
-		</h1>
-		
-	   
-	  <hr>
+	
+	  
 
 	  <div class="row row-cols-1 row-cols-md-2 g-4">
 
 <!--EMPLEADOS -->
-  <div class="col ">
+  <div class="col empleados">
     <div class="card m-5 ">
     	<h5 class="card-title text-center p-3 ">Empleados</h5>
     	<div class="divider"></div>
@@ -113,7 +117,7 @@ session_start();
             <input class="form-control" type="file" id="formFile">
         </div>
 
-        <button type="submit" class="btn btn-primary m-4 w-50">Enviar</button>
+        <button type="submit" class="btn btn-primary m-4 w-50" name="AgregarEmpleado">Enviar</button>
     </form>
 				      </div>
 				      
@@ -121,7 +125,7 @@ session_start();
 				  </div>
 				</div>
 
-        	<button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#modalModificar">Modificar</button>
+        	<button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#modalModificar">Mostrar </button>
         						
         	<!-- Modal modificar-->
 
@@ -149,6 +153,7 @@ session_start();
 								      <th scope="col">Correo</th>
 								      <th scope="col">Telefono</th>
 								      <th scope="col">Direccion</th>
+								      <th scope="col">Cargo</th>
 								      <th colspan="2">Acciones</th>
 								    </tr>
 								  </thead>
@@ -157,21 +162,24 @@ session_start();
 										<?php foreach ($Empleados as  $Empleado): ?>
 								<tr>
 									 
-									<td> <?php echo $Empleado[ 'Identificacion']  ?></td> 
+									<td> <?php echo $Empleado[ 'Id_Empleados']  ?></td> 
 									<td> <?php echo $Empleado[ 'Nombre']  ?></td> 	
 									<td> <?php echo $Empleado[ 'Apellido']  ?></td> 	
 									<td> <?php echo $Empleado[ 'Correo']  ?></td> 	
 									<td> <?php echo $Empleado[ 'Telefono']  ?></td> 
-									<td> <?php echo $Empleado[ 'Direccion']  ?></td> 
+									<td> <?php echo $Empleado[ 'Direccion']  ?></td> <!-- 
+								<td> <?php echo $Empleado[ 'FechaDeNacimiento']  ?></td> 
+									<td> <?php echo $Empleado[ 'Imagen']  ?></td>   -->
+									<td> <?php echo $Empleado[ 'Cargo']  ?></td> 
 									
 									<td >
-								                     <a href="./Consultas/EliminarEmpleado.php?accion=<?php echo $Empleado['Identificacion']; ?>"
+								                     <a href="./Consultas/EliminarEmpleado.php?accion=<?php echo $Empleado['Id_Empleados']; ?>"
 								                        >        
 								                        <i class="fas fa-trash-alt text-danger"> Eliminar</i>
 								    </td>
 								                 
 								                <td>
-								                    <a href="./Consultas/EditarEmpelado.php?accion=<?php echo $Empleado['Identificacion']; ?>"
+								                    <a href="./Consultas/EditarEmpelado.php?accion=<?php echo $Empleado['Id_Empleados']; ?>"
 								                    	>
 								                    
 								                       <i class="fas fa-sync text-success"> Editar</i>
@@ -198,7 +206,7 @@ session_start();
   </div>
 
 <!--BUSETAS -->
-   <div class="col ">
+   <div class="col busetas">
     <div class="card m-5 text-center ">
     	<h5 class="card-title text-center p-3">BUSETAS</h5>
     	<div class="divider"></div>
@@ -238,7 +246,7 @@ session_start();
         </div>
 
         
-        <button type="submit" name="Enviar" value="Enviar" class="btn btn-primary m-4 w-50">Enviar</button>
+        <button type="submit" name="buseta" value="Enviar" class="btn btn-primary m-4 w-50">Enviar</button>
 
     </form>
 
@@ -248,7 +256,7 @@ session_start();
 				  </div>
 				</div>
 
-        	<button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#modalModificarBusetas">Modificar</button>
+        	<button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#modalModificarBusetas">Mostrar</button>
         						
         	<!-- Modal modificar Busetas-->
 				<div class="modal fade" id="modalModificarBusetas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -273,7 +281,9 @@ session_start();
 								      <th scope="col">Modelo</th>
 								      <th scope="col">Placa</th>
 								      <th scope="col">Color</th>
-								      
+								      <th scope="col">Seguro</th>
+								      <th scope="col">Tec. Mecanica</th>
+								      <th scope="col">ID Conductor</th>
 								      <th colspan="2">Acciones</th>
 								    </tr>
 								  </thead>
@@ -287,6 +297,9 @@ session_start();
 									<td> <?php echo $buseta[ 'Modelo']  ?></td> 	
 									<td> <?php echo $buseta[ 'Placa']  ?></td> 	
 									<td> <?php echo $buseta[ 'Color']  ?></td> 	
+									<td> <?php echo $buseta[ 'Seguro']  ?></td> 	
+									<td> <?php echo $buseta[ 'TecnoMecanica']  ?></td> 	
+									<td> <?php echo $buseta[ 'IdConductor']  ?></td> 	
 									
 									
 									<td>
@@ -325,7 +338,7 @@ session_start();
 
 <!-- RUTAS -->
 
-  <div class="col ">
+  <div class="col ruta m-0">
     <div class="card m-5 text-center ">
     	<h5 class="card-title text-center p-3">RUTAS</h5>
     	<div class="divider"></div>
@@ -361,16 +374,16 @@ session_start();
         <!--Validar que solo acepte imagenes -->
         <div class="p-2 m-2">
             <label for="formFile" class="form-label">Ingresar Imagen</label>
-            <input class="form-control" type="file" id="formFile">
+            <input class="form-control" type="file" id="formFile" name="Imagen" required="">
         </div>
 
  		<div class="p-2 m-2">
             <label for="Info" class="form-label">Informacion</label>
-            <textarea name="Info" rows="10" cols="52" placeholder="Informacion refrente" class="text-center"></textarea>
+            <textarea name="Informacion" rows="10" cols="52" placeholder="Informacion refrente" class="text-center"></textarea>
         </div>
 
        
-        <button type="submit" class="btn btn-primary m-4 w-50">Enviar</button>
+        <button type="submit" name="rutas" class="btn btn-primary m-4 w-50">Enviar</button>
 
     </form>
 				      </div>
@@ -402,6 +415,7 @@ session_start();
 								      <th scope="col">Precio</th>
 								      <th scope="col">Info</th>
 								      <th scope="col">Imagen</th>
+								      <th scope="col">Bus Asignado</th>
 								      
 								      <th colspan="2">Acciones</th>
 								    </tr>
@@ -415,19 +429,19 @@ session_start();
 									<td class="py-5"> <?php echo $ruta[ 'Nombre']  ?></td> 
 
 									<td class="py-5"> <?php echo $ruta[ 'Precio']  ?></td> 	
-									<td > <?php echo $ruta[ 'Info']  ?></td> 	
+									<td > <?php echo $ruta[ 'Informacion']  ?></td> 	
 									<td><img src="./Imagenes/<?php echo $ruta[ 'Imagen']?>" height="200px" width="100%"> </td> 	
-									
+									<td class="py-5"> <?php echo $ruta[ 'Placa']  ?></td> 
 									
 									<td class="py-5">
-								                     <a href="./Consultas/EliminarRuta.php?accion=<?php echo $ruta['Id']; ?>"
+								                     <a href="./Consultas/EliminarRuta.php?accion=<?php echo $ruta['Id_Rutas']; ?>"
 								                        >        
 								                        <i class="fas fa-trash-alt text-danger"> Eliminar</i>
 								                    </a>
 								    </td>
 								                 
 								    <td class="py-5">
-								                    <a href="./Consultas/EditarRuta.php?accion=<?php echo $ruta['Id']; ?>">
+								                    <a href="./Consultas/EditarRuta.php?accion=<?php echo $ruta['Id_Rutas']; ?>">
 								                    
 								                       <i class="fas fa-sync text-success"> Editar </i>
 								                        
@@ -452,7 +466,7 @@ session_start();
   </div>
   
 <!-- ESTADISTICAS -->
-  <div class="col ">
+  <div class="col estadistica m-0">
     <div class="card m-5 text-center ">
     	<h5 class="card-title text-center p-3">ESTADISTICA</h5>
     	<div class="divider"></div>
@@ -544,12 +558,12 @@ require_once('./Consultas/SelectUser.php');
 
 ?>
 
-<hr>
-<h1 class="mx-5 my-5 text-primary text-center">
-                Bienvenido
+
+<h1 class="mx-5 my-5 text-primary text-center title">
+                Administraci&oacute;n
             </h1>
-<div class="m-5" >
-		<table  border="1" class="table table-hover my-5">
+<div class="m-5 table-responsive">
+		<table  border="1" class="table table-dark table-hover my-5  table-bordered">
 	<thead>
 
 		<caption>Usuarios</caption>
@@ -565,14 +579,14 @@ require_once('./Consultas/SelectUser.php');
 
 
 	</thead>
-	<tbody>
+	<tbody class="table table-striped table-light">
 		<?php foreach ($registros as  $registro): ?>
 <tr>
 	 
-	<td> <?php echo $registro[ 'Usuario']  ?></td> 	
+	<td> <?php echo $registro[ 'Id_Usuarios']  ?></td> 	
 	<td> <?php echo $registro[ 'Password']  ?></td> 	
 	<td> <?php echo $registro[ 'Nombre']  ?></td> 	
-	<td> <?php echo $registro[ 'Identificacion']  ?></td> 
+	<td> <?php echo $registro[ 'Correo']  ?></td> 
 	<td> <?php echo $registro[ 'Telefono']  ?></td> 
 	<td> <?php echo $registro[ 'Direccion']  ?></td> 
 	<td> <?php echo $registro[ 'Rol']  ?></td> 
@@ -594,10 +608,10 @@ require_once('./Consultas/SelectUser.php');
 
 	 </tbody>
 	  </table>
+
 	</div>
 
 
-	  
 	  <script src="https://kit.fontawesome.com/247d2323bf.js" crossorigin="anonymous"></script>	
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>

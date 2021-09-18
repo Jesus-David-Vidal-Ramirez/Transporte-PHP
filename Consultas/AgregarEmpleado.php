@@ -2,6 +2,8 @@
 
 require_once'../Conexiones/conexion.php';
 
+
+if(isset($_POST["AgregarEmpleado"])){
 $Identificacion=$_POST["Identificacion"];
 $Nombre=$_POST["Nombre"]; 
 $Apellido=$_POST["Apellido"];
@@ -37,6 +39,11 @@ if($stmt->execute([
 else{
  	echo "<script> alert('Correo ya definido Ingrese otro Correo'); window.location.href='../Registro.php'; </script>";
  }
+}else{
+	echo "<script> alert('URL No encontrada ');
+			window.location.href='../Acceso.php';
+		</script>" ;
+}
 
 
 ?>

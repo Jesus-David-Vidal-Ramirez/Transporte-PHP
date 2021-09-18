@@ -7,7 +7,7 @@ $usuario=$_GET["accion"];
 
 
 echo $usuario;
-$sql="DELETE from registro WHERE usuario=:accion";
+$sql="DELETE from registros WHERE usuario=:accion";
 
 $stmt=$pdo->prepare($sql);
 

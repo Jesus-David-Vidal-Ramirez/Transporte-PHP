@@ -1,6 +1,6 @@
 
 
-
+/*Admin*/
 .divider{
 	
 	background-color: blue;
@@ -8,4 +8,94 @@
 	width: 120px;
 	margin: auto;
 }
+
+
+/* ----------------------------------------------- REGISTRO -----------------------------------------------------*/
+.regresar{
+	background-color: #0a0a0a;
+    background-image: linear-gradient(251deg, #0a0a0a 0%, #9e9e9e 100%);
+	color:#fff;
+
+}
+
+.regresar:hover{
+	background-color: #c7c7c7;
+	background-image: linear-gradient(331deg, #c7c7c7 0%, #b9b9b9 100%);
+	color:#000;
+}
+
+.registro{
+	box-shadow: 1px 10px 10px 10px #fff;
+	box-shadow: 12px 12px 12px 20px rgba(10, 20, 30, 1);
+	margin: 80px 0;
+
+}
+
+.body{
+	background-color: #82caff;
+    background-image: linear-gradient(45deg, #82caff 0%, #80D0C7 100%);
+}
+
+.labelRegistro{
+	color:#000;
+	font-size: 20px;
+}
+
+.inputRegistro{
+	background-color: #f5f5f5;
+    background-image: linear-gradient(331deg, #f5f5f5 0%, #dcdcdc 100%);
+
+}
+
+/* ----------------------------------------------- INDEX Y CORREO-----------------------------------------*/
+
+textarea{
+	resize: none;
+}
+
+.labelCorreo{
+	text-transform: uppercase;
+	
+	font-weight: bold;	
+}
+.title{
+	text-transform: uppercase;
+}
+
+
+
+/* -----------------------------------------------FONDOS ACCESO -----------------------------------------------*/
+
+.acceso{
+	background-color: #dcf1ff;
+	background-image: linear-gradient(180deg, #dcf1ff 0%, #e1fffb 100%);
+
+}
+
+.empleados, .busetas{
+background-color: #dcf1ff;
+background-image: linear-gradient(180deg, #dcf1ff 0%, #80f9e3 100%);
+
+}
+
+.ruta, .estadistica{
+	
+	 background-color: #dcf1ff;
+	 background-image: linear-gradient(0deg, #dcf1ff 0%, #80f9e3 100%);
+}
+
+
+
+/* ----------------------------------------- Media de las cartas de las rutas----------------------------*/
+@media screen and (min-width: 768px) and (max-width: 1000px) { 
+	
+  .rutas{
+  	width: 50%;
+  	
+  }
+
+ }
+
+
+
 

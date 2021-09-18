@@ -1,0 +1,7 @@
+SELECT e.Nombre, e.Id_Empleados, e.Cargo, b.Placa,b.IdConductor FROM EMPLEADOS AS e  LEFT JOIN BUSETAS AS b ON e.Id_Empleados = b.IdConductor WHERE e.Cargo = 'Conductor' AND b.IdConductor IS NULL; 
+// SAber que conductores no tienen buses asignados
+
+
+SELECT * FROM rutas AS r left JOIN busetas AS b ON b.Placa = r.Placa WHERE r.Placa IS NULL ;
+
+/// SABER QUE BUSETA NO HA SIDO ELEGIDA AUN

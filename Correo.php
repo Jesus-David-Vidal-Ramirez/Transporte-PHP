@@ -34,7 +34,7 @@ try {
 	);
     //Recipients
     $mail->setFrom($Correo);
-    $mail->addAddress('fernandodiaz.1904@gmail.com');     //Add a recipient
+    $mail->addAddress('vidalramirezjesus63@gmail.com');     //Add a recipient
     // $mail->addAddress('ellen@example.com');               //Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');
     // $mail->addCC('cc@example.com');
@@ -52,6 +52,18 @@ try {
 
     $mail->send();
     echo 'Envio de mensaje satisfactoriamente';
+  
+  
+  echo "<script>
+    function alerta(){
+         swal({
+           title: "ENVIADO!",
+           text: "Esto es un mensaje de error",
+           type: "error",
+         });
+        }
+</script>" ;
+
 } catch (Exception $e) {
     echo "Error al enviar el mensaje: {$mail->ErrorInfo}";
     echo "<br>" , $mail->ErrorInfo;

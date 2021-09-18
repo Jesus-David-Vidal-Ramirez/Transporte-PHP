@@ -5,7 +5,7 @@ require_once'../Conexiones/conexion.php';
 
 $Ruta=$_GET["accion"];
 
-$sql="DELETE from rutas WHERE Id=:accion";
+$sql="DELETE from rutas WHERE Id_Rutas=:accion";
 
 $stmt=$pdo->prepare($sql);
 

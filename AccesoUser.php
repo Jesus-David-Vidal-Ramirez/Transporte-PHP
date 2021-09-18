@@ -1,21 +1,18 @@
 <?php
 
-
 session_start();
-
 	if(!isset($_SESSION['Usuario'])):
 	//if(!$_SESSION['Usuario']):
-
 ?>
-
 <script>
-	alert("Acceso denegado ");
-	window.location.href="index.php";
+  alert("Acceso denegado ");
+  window.location.href="index.php";
 </script>
 
 <?php
 
 	endif;
+
 ?>
 
 
@@ -31,20 +28,22 @@ session_start();
  		<link rel="stylesheet" type="text/css" href="./CSS/estilos.css">
 </head>
 <body>
-
-
-
-	
-									   
+							   
 <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4" id="Inicio">
 
   <div class="container-fluid ">
 
 	<div class="dropdown m-3">
 	  <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-	    <?php  echo $_SESSION['Usuario']  ?>
-	  </button>
+	    <?php 
+        echo $_SESSION['Correo'];
+       //echo $_SESSION['Usuario']  ?>
+      
 
+
+
+	  </button>
+          
 	  <ul class="dropdown-menu" >
 	    <li class="Reservas" data-bs-toggle="modal" data-bs-target="#Reservas"><a class="dropdown-item" href="#" >Reservas</a></li>
 	    <li class="Compras" data-bs-toggle="modal" data-bs-target="#Compras" ><a class="dropdown-item" href="#">Compras</a></li>
@@ -110,15 +109,16 @@ session_start();
   </div>
 </nav>
 
-
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
    <text x="680" y="100" font-size="4em" font-weight="2em" letter-spacing="1em">RIKLINSUS</text>
-  <path fill="#0099ff" q
+  <path fill="#0099ff" fill-opacity="1" d="M0,32L30,48C60,64,120,96,180,96C240,96,300,64,360,58.7C420,53,480,75,540,122.7C600,171,660,245,720,245.3C780,245,840,171,900,165.3C960,160,1020,224,1080,250.7C1140,277,1200,267,1260,250.7C1320,235,1380,213,1410,202.7L1440,192L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path>
+</svg>
+
 
 
 <!--Contenido o section -->
 <div class="p-4" id="Destinos">
-  <h1>
+  <h1 class="title ">
   	Destinos mas buscados
   </h1>
 </div>
@@ -134,27 +134,47 @@ require_once('./Consultas/SelectRutas.php');
 
  <?php foreach ($rutas as  $ruta): ?>
 
- <div class="col">
+ <div class="col rutas">
     <div class="card">
       <img src="Imagenes/<?php echo $ruta[ 'Imagen']  ?>" class="card-img-top" alt="<?php echo $ruta[ 'Imagen']  ?>" width="1200px" height="310px">
       <div class="card-body">
         <h5 class="card-title"> <?php echo $ruta[ 'Nombre']  ?> </h5>
         <p class="card-text">
-         <?php echo $ruta[ 'Info']  ?>
+         <?php echo $ruta[ 'Informacion']  ?>
         </p>
        
       </div>
       <div class="card-footer d-flex justify-content-between"   >
-        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Comprar</button>
-        <strong calss="pl-2"><?php echo $ruta[ 'Precio']  ?></strong>
+        <?php
+          if( $ruta[ 'Placa'] != ''){
+
+        ?>
+        <a class="btn btn-danger"  href="Comprar.php?identificación=<?php echo $ruta['Id_Rutas'];?>" >
+          Comprar
+        </a>
         
-       <button class="btn btn-warning align-items-start" data-bs-toggle="modal" data-bs-target="#exampleModal">Reservar</button>
+        <?php
+        }
+       ?>
+        <strong calss="pl-2"><?php echo $ruta[ 'Precio']  ?></strong>
+        <?php
+          if( $ruta[ 'Placa'] != ''){
+            
+        ?>  
+       <a class="btn btn-warning  "  href="Reservar.php?identificación=<?php echo $ruta['Id_Rutas'];?>" >
+          Reservar
+        </a>
+       <?php
+        }else{
+          echo "
+            <h4> No Disponible </h4> " ;
+        }
+       ?>
       </div>
     </div>
   </div>
   <?php endforeach; ?> 
 </div>
-
 
 
 
@@ -203,25 +223,63 @@ require_once('./Consultas/SelectRutas.php');
                       <br>
                       Sabados y domingos 8am : 4pm 
                     </p>
+                    <strong>PQRS</strong>
+                <p>
+  <a class="btn btn-primary mt-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" id="correo" onclick="ocultarCorreo()">
+    Realizar
+  </a>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <form method="post" action="Correo.php" class="t-2">
+      
+      <label name="Asunto" class="mt-2 labelCorreo">Asunto</label>
+      <input type="text" name="Asunto" placeholder="Asunto" autofocus="on" class="mt-2 w-100" required="" autofocus=""><br>
+
+      <label name="Asunto" class="mt-2 labelCorreo">Correo</label>
+      <input type="email" name="Correo" value="<?php echo $_SESSION['Correo'];?>" placeholder="TuCorreo@gmail.com" class="mt-2 w-100" required=""><br>
+
+      <label class="mt-2 labelCorreo">Mensaje</label><br>
+      <textarea name="Mensaje" class="mt-2 w-100" rows="6"  required=""></textarea><br>
+
+      <input type="submit" name="Enviar" class="w-100 mt-3 d-flex align-items-center justify-content-center btn btn-outline-primary ">
+
+    </form>
+
+  </div>
+</div>
               </div>
                
             </div>
         </div>
     </div>
     
-     <div class="col-sm-4 " >
+     <div class="col-sm-4">
         <div class="card">
             <div class="card-body align-items-end">
                 <h5 class="card-title text-center">Redes Sociales</h5>
-                <div class="text-center">
-                  <a href="#" title="Whatsapp" >
-                    <i class="fab fa-whatsapp-square fa-7x"></i><br> </a>
-                  <a href="#" title="Facebook"><i class="fab fa-facebook-square fa-7x"></i><br> </a>
-                  <a href="#" title="Instagram"> <i class="fab fa-instagram-square fa-7x"> </i><br> </a>
-                </div>
-            </div>
-        </div>
-    </div>
+                  <div class="grid">
+
+                    <div class="g-col-4  d-flex justify-content-start">
+                      <a href="#" title="Whatsapp">
+                        <i class="fab fa-whatsapp-square fa-7x"></i> 
+                      </a>
+                    </div>
+
+                    <div class="g-col-4 d-flex justify-content-center">
+                      <a href="#" title="Facebook" class=" justify-content-center">
+                        <i class="fab fa-facebook-square fa-7x "></i> 
+                      </a>
+                    </div>
+                    <div class="g-col-4 d-flex justify-content-end">
+                      <a href="#" title="Instagram" class=" justify-content-end"> 
+                        <i class="fab fa-instagram-square fa-7x"> </i> 
+                      </a>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
         
 </div>
 
@@ -237,10 +295,9 @@ require_once('./Consultas/SelectRutas.php');
 
 
 
-
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
  
 	<script src="https://kit.fontawesome.com/247d2323bf.js" crossorigin="anonymous"></script>	
-
+  <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
