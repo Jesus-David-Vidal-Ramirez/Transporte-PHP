@@ -1,7 +1,6 @@
 <?php 
 
 require_once'../Conexiones/conexion.php';
-
 session_start();
     if(!isset($_SESSION['Usuario'])):
     
@@ -17,27 +16,23 @@ session_start();
 
 ?>
 <?php
-$usuario=$_GET["accion"];
 
+$Reserva=$_GET["accion"];
 
-echo $usuario;
-$sql="DELETE from registros WHERE usuario=:accion";
+$sql="DELETE FROM detalleventas WHERE Id_Venta=:accion";
 
 $stmt=$pdo->prepare($sql);
 
 
 	if ($stmt->execute([
-	':accion'=>$usuario
-	
+	':accion'=>$Reserva,
 		]));
 	
 {
-	echo "<script> alert('eliminado ');
-	window.location.href='../Acceso.php';
+	echo "<script> alert('Reserva Eliminada');
+	window.location.href='../AccesoUser.php';
 </script>" ;
 
-	
-	
 }
 
-?>
+?>	

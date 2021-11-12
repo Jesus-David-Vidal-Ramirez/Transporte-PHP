@@ -16,15 +16,15 @@ try {
     //Server settings
     
     $mail->isSMTP();                                            //Send using SMTP
-    $mail->SMTPDebug = 1;                      //Enable verbose debug output
+    $mail->SMTPDebug = 0;                      //Enable verbose debug output
     $mail->Mailer = "smtp";
     $mail->Host = "smtp.gmail.com";                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = "vidalramirezjesus63@gmail.com";                     //SMTP username
-    $mail->Password   = "Ramirez1.";                               //SMTP password
+    $mail->Username   = "vidalramirezjesus@gmail.com";                     //SMTP username
+    $mail->Password   = "12345";                               //SMTP password
     $mail->SMTPSecure = 'ldap_start_tls(link)';
     //$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
-    $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->Port       = 587;                                    ;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 	$mail->SMTPOptions = array(
 	    'ssl' => array(
 	        'verify_peer' => false,
@@ -32,10 +32,41 @@ try {
 	        'allow_self_signed' => true
 	    )
 	);
-    //Recipients
+    
+$cuerpo="
+
+<table width='650' border='1'>
+  <tr  bgcolor='#0066FF'>
+    <td colspan='2' ><div align='center'><font size='+1' face='Verdana, Arial, Helvetica, sans-serif' color='#FFFFFF'><b>Correo de la Pagina Web:Transportes RIKLINSUS</b></font></div></td>
+  </tr>
+  <tr >
+    <td width='150' bgcolor='#0066FF'><font size='-1' face='Verdana, Arial, Helvetica, sans-serif' color='#FFFFFF'><b>Nombres y Apellidos</b></font></td>
+    <td width='500'  ><font size='-1' face='Verdana, Arial, Helvetica, sans-serif' color='#000000'>$Asunto</font></td>
+  </tr>
+ 
+  <tr>
+    <td bgcolor='#0066FF'><font size='-1' face='Verdana, Arial, Helvetica, sans-serif' color='#FFFFFF'><b>Telefono</b></font></td>
+    <td ><font size='-1' face='Verdana, Arial, Helvetica, sans-serif' color='#000000'>Telefono</font></td>
+  </tr>
+ 
+  <tr>
+    <td bgcolor='#0066FF'><font size='-1' face='Verdana, Arial, Helvetica, sans-serif' color='#FFFFFF'><b>Correo Electr�nico</b></font></td>
+    <td ><font size='-1' face='Verdana, Arial, Helvetica, sans-serif' color='#000000'>$Correo</font></td>
+  </tr>
+   <tr bgcolor='#0066FF'>
+    <td colspan='2' ><font size='-1' face='Verdana, Arial, Helvetica, sans-serif' color='#FFFFFF'><b>Mensaje:</b></font></td>
+  </tr>
+  <tr>
+    <td colspan='2'  ><font size='-1' face='Verdana, Arial, Helvetica, sans-serif' color='#000000'>$Mensaje</font></td>
+  </tr>
+  
+</table>
+
+
+";
     $mail->setFrom($Correo);
-    $mail->addAddress('vidalramirezjesus63@gmail.com');     //Add a recipient
-    // $mail->addAddress('ellen@example.com');               //Name is optional
+    $mail->addAddress('vidalramirezjesus@gmail.com');     //Add a recipient
+    //$mail->addAddress('ellen@example.com');               //Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');
     // $mail->addCC('cc@example.com');
     // $mail->addBCC('bcc@example.com');
@@ -47,64 +78,21 @@ try {
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = $Asunto;
-    $mail->Body    = $Mensaje . " " . $Correo;
+    $mail->Body    = $cuerpo;
     // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
     echo 'Envio de mensaje satisfactoriamente';
   
-  
-  echo "<script>
-    function alerta(){
-         swal({
-           title: "ENVIADO!",
-           text: "Esto es un mensaje de error",
-           type: "error",
-         });
-        }
-</script>" ;
 
+    echo "<script> alert('Envio de mensaje satisfactoriamente!'); window.location.href='./AccesoUser.php'; </script>" ;
 } catch (Exception $e) {
-    echo "Error al enviar el mensaje: {$mail->ErrorInfo}";
-    echo "<br>" , $mail->ErrorInfo;
+    // echo "Error al enviar el mensaje: {$mail->ErrorInfo}";
+    // echo "<br>" , $mail->ErrorInfo;
+    // echo "<br> $Asunto  $Mensaje  $Correo";
+    // echo print_r($mail);
+     echo "<script> alert('ERROR EN EL ENVIO!'); window.location.href='./AccesoUser.php'; </script>" ;
 }
 
-
-
-
-// if(!$mail->send()){
-// 	echo "ERRRROOR";
-// }else{
-// 	echo "ENVIOOO";
-// }
-
-
-// $correoreceptor= "From: vidalramirezjesus63@gmail.com";
-// $Asunto = $_POST["Asunto"];
-// $Mensaje = $_POST["Mensaje"];
-// $Correo = $_POST["Correo"];
-
-
-// $Nombres = "JESÚS DAVID ";
-// $Apellidos = "VIDAL RAMIREZ";
-// $Telefono = "3015";
-// $Ciudad = "Sincelejo";
-
-// // $Datos = "Nombres: " . $Nombres . "\nApellido: " . $Apellidos . "\nTelefono: " . $Telefono . "\nCorreo: " . $Correo . "\nLocalidad: " . $Ciudad;
-// $Contenido = "Asunto " . $Asunto . "\nApellido " . $Apellidos . "\nCorreo " . $Correo . "\nMensaje " . $Mensaje . "\nNombres " . $Nombres ;
-// if(mail($correoreceptor,$Asunto,$Mensaje,$Contenido)){
-// 	echo "Envio";
-// }else{
-// 	echo "No envio";
-// }
-
-// echo '<script>alert("Correo Enviado Exitoso JESÚS")</script>';
-
-// $sa = mail($correoreceptor,$Asunto,$Mensaje,$Contenido);
-// echo "<br>Esta es la variable " . $Contenido;
-// // if(mail($Correo,$Asunto,$Mensaje,$correoreceptor))
-// // { echo '<script>alert("Correo Enviado Exitoso JESÚS")</script>'; }
-
-// // else{ echo '<script>alert("Correo NOOOOOo Enviado Exitoso JESÚS")</script> ';}
 
 ?>

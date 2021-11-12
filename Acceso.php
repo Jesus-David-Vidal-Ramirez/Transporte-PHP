@@ -51,9 +51,6 @@ session_start();
 <div class="container">
 		<hr>
 		
-	
-	  
-
 	  <div class="row row-cols-1 row-cols-md-2 g-4">
 
 <!--EMPLEADOS -->
@@ -61,9 +58,6 @@ session_start();
     <div class="card m-5 ">
     	<h5 class="card-title text-center p-3 ">Empleados</h5>
     	<div class="divider"></div>
-    	
-	    
-	    	
 	    	  <img src="./Imagenes/Empleados/Empleado.png" class="img-fluid rounded-circle " title='Empleados'style="width: 100% ; height:400px; ">
 	  	
       	<div class="card-body text-center">
@@ -111,11 +105,30 @@ session_start();
             <label for="Correo" class="form-label">Correo</label>
             <input type="text" class="form-control" id="Correo" name="Correo" required="true">
         </div>
+
+        <div class="p-2 m-2">
+        	<label for="Cargos" class="form-label">Cargo</label>
+            <select name="Cargo" class="form-select">
+			<?php
+			require_once('./Consultas/SelectCargos.php');
+			 foreach($Cargos as $cargos):
+            		
+            		//echo '<option value="'.$cargos['Nombre'].' "> '.$cargos['Id_Cargo'].' </option>';
+            		?>
+            		<option value="<?php print_r($cargos['Nombre'])?> "><?php  print_r($cargos['Nombre'])?></option>
+                <?php
+		            endforeach;
+		            ?>
+
+			</select>            
+		</div>
+		
+
         <!--Validar que solo acepte imagenes -->
-        <div class="p-2 m-2" >
+       <!--  <div class="p-2 m-2" >
             <label for="formFile" class="form-label">Ingresar Imagen</label>
             <input class="form-control" type="file" id="formFile">
-        </div>
+        </div> -->
 
         <button type="submit" class="btn btn-primary m-4 w-50" name="AgregarEmpleado">Enviar</button>
     </form>
@@ -153,13 +166,20 @@ session_start();
 								      <th scope="col">Correo</th>
 								      <th scope="col">Telefono</th>
 								      <th scope="col">Direccion</th>
+								      <th scope="col">Ingreso</th>
 								      <th scope="col">Cargo</th>
 								      <th colspan="2">Acciones</th>
 								    </tr>
 								  </thead>
 								  <tbody>
 								    <tbody>
-										<?php foreach ($Empleados as  $Empleado): ?>
+										<?php foreach ($Empleados as  $Empleado): 
+
+
+											if($Empleado['Id_Empleados'] != 0){
+
+
+											?>
 								<tr>
 									 
 									<td> <?php echo $Empleado[ 'Id_Empleados']  ?></td> 
@@ -167,15 +187,17 @@ session_start();
 									<td> <?php echo $Empleado[ 'Apellido']  ?></td> 	
 									<td> <?php echo $Empleado[ 'Correo']  ?></td> 	
 									<td> <?php echo $Empleado[ 'Telefono']  ?></td> 
-									<td> <?php echo $Empleado[ 'Direccion']  ?></td> <!-- 
-								<td> <?php echo $Empleado[ 'FechaDeNacimiento']  ?></td> 
-									<td> <?php echo $Empleado[ 'Imagen']  ?></td>   -->
+									<td> <?php echo $Empleado[ 'Direccion']  ?></td> 
+								    <td> <?php echo $Empleado[ 'FechaDeNacimiento']  ?></td> 
+									<!-- <td> <?php echo $Empleado[ 'Imagen']  ?></td>    -->
 									<td> <?php echo $Empleado[ 'Cargo']  ?></td> 
 									
 									<td >
-								                     <a href="./Consultas/EliminarEmpleado.php?accion=<?php echo $Empleado['Id_Empleados']; ?>"
+										
+								                     <a name="EliminarEmpleado" href="./Consultas/EliminarEmpleado.php?accion=<?php echo $Empleado['Id_Empleados']; ?>"
 								                        >        
 								                        <i class="fas fa-trash-alt text-danger"> Eliminar</i>
+								        
 								    </td>
 								                 
 								                <td>
@@ -190,7 +212,9 @@ session_start();
 								                    </a>
 								                </td>
 									</tr>
-									<?php endforeach; ?> 
+									<?php 
+								}
+								endforeach; ?> 
 
 									 </tbody>
 								  </tbody>
@@ -206,6 +230,19 @@ session_start();
   </div>
 
 <!--BUSETAS -->
+<?php 
+	require_once'./Conexiones/conexion.php';
+
+$sql = "SELECT Id_Empleados, Nombre, Apellido FROM empleados WHERE cargo = 'conductor' ";
+
+$stmt = $pdo->prepare($sql);
+
+$stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+$stmt->execute();
+
+$conductores=$stmt->fetchAll();
+?>
    <div class="col busetas">
     <div class="card m-5 text-center ">
     	<h5 class="card-title text-center p-3">BUSETAS</h5>
@@ -242,9 +279,36 @@ session_start();
         
         <div class="p-2 m-2">
             <label for="Color" class="form-label">Color</label>
-            <input type="text" name="Color" class="form-control" id="telefono" required="true">
+            <input type="text" name="Color" class="form-control" id="Color" required="true">
         </div>
 
+        <div class="p-2 m-2">
+            <label for="Seguro" class="form-label">Seguro</label>
+            <input type="text" name="Seguro" class="form-control" id="Seguro" required="true">
+        </div>
+
+        <div class="p-2 m-2">
+            <label for="TecnoMecanica" class="form-label">TecnoMecanica</label>
+            <input type="text" name="TecnoMecanica" class="form-control" id="TecnoMecanica" required="true">
+        </div>
+
+        <!-- <div class="p-2 m-2">
+            <label for="Conductor" class="form-label">Conductor</label>
+            <input type="text" name="Conductor" class="form-control" id="Conductor" required="true">
+        </div> -->
+
+		<div class="p-2 m-2">
+			<label for="TecnoMecanica" class="form-label">Conductor</label>
+        	<select name="IdConductor" class="form-select">
+                <option></option>
+        <?php foreach ($conductores as  $conductor): 
+        
+
+            echo '<option value=" '.$conductor[ 'Id_Empleados'].' "> '.$conductor[ 'Nombre'].'  '.$conductor[ 'Apellido'].' CC = '.$conductor[ 'Id_Empleados'].'  </option>';
+        endforeach;
+        ?>
+    		</select>
+    	</div>
         
         <button type="submit" name="buseta" value="Enviar" class="btn btn-primary m-4 w-50">Enviar</button>
 
@@ -289,7 +353,7 @@ session_start();
 								  </thead>
 								  <tbody>
 								  	<!-- HAY QUE VALIDAR QUE LA BUSETA TENGA PLACA UNICA -->
-								    <tbody>
+								    
 										<?php foreach ($Busetas as  $buseta): ?>
 								<tr>
 									 
@@ -319,7 +383,7 @@ session_start();
 									</tr>
 									<?php endforeach; ?> 
 
-									 </tbody>
+									 
 								  </tbody>
 								</table>
 
@@ -360,7 +424,11 @@ session_start();
 				      <div class="modal-body">
 	<form class="" action="./Consultas/AgregarRutas.php" method="POST">
 
-        
+        <div class="p-2 m-2">
+            <label for="Usuario" class="form-label">Vehiculo</label>
+            <input type="text" name="Nombre" class="form-control  text-center" id="exampleInputEmail1" aria-describedby="emailHelp" required="true" placeholder="UN SELECT">
+            <!-- SELECT * FROM rutas AS r left JOIN busetas AS b ON b.Placa = r.Placa WHERE r.Placa IS NULL  -->
+        </div>
         <div class="p-2 m-2">
             <label for="Usuario" class="form-label">Nombre</label>
             <input type="text" name="Nombre" class="form-control  text-center" id="exampleInputEmail1" aria-describedby="emailHelp" required="true" placeholder="Sicnelejo - Sucre">
@@ -402,13 +470,13 @@ session_start();
 				        <h5 class="modal-title col-11 text-center" id="exampleModalLabel">MODIFICAR RUTAS</h5>
 				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				      </div>
-				      <div class="modal-body">
+				      <div class="modal-body table-responsive">
 				        
 				      	<?php
 						require_once('./consultas/SelectRutas.php');
 						?>
 				        
-				      	<table class="table table-bordered" >
+				      	<table class="table table-bordered " >
 								  <thead>
 								    <tr>
 								      <th scope="col">Nombre</th>
@@ -430,7 +498,11 @@ session_start();
 
 									<td class="py-5"> <?php echo $ruta[ 'Precio']  ?></td> 	
 									<td > <?php echo $ruta[ 'Informacion']  ?></td> 	
-									<td><img src="./Imagenes/<?php echo $ruta[ 'Imagen']?>" height="200px" width="100%"> </td> 	
+									<td class="py-5">
+										<figure>
+										<img class="justify-content-center  " src="./Imagenes/<?php echo $ruta[ 'Imagen']?>" height="200px" width="350px">
+									</figure>
+										 </td> 	
 									<td class="py-5"> <?php echo $ruta[ 'Placa']  ?></td> 
 									
 									<td class="py-5">
@@ -470,12 +542,12 @@ session_start();
     <div class="card m-5 text-center ">
     	<h5 class="card-title text-center p-3">ESTADISTICA</h5>
     	<div class="divider"></div>
-    	<a href="RecursosAdmin/Estadisticas.php">
-         <img src="./Imagenes/Estadisticas/estadistica.png" class="img-fluid rounded-circle m-4" title='Estadisticas'style="width: 70% ; height: 350px; "></a>
+    	
+         <img src="./Imagenes/Estadisticas/estadistica.png" class="img-fluid rounded-circle m-4" title='Estadisticas'style="width: 90% ; height: 350px; ">
       <div class="card-body text-center">
         <p class="card-text "><strong> AQUI PUEDES AGREGAR Y MODIFICAR RUTAS </strong></p>
        
-        	<button type="button" class="btn btn-primary m-3 w-50"  data-bs-toggle="modal" data-bs-target="#modalMostrarEstadisticas">Mostrar</button>
+        	<a type="button"  href="./Estadisticas.php" target="_black" class="btn btn-primary m-3 w-50"  >Mostrar</a>
         						
         	<!-- Modal Mostrar Rutas-->
 				<div class="modal fade" id="modalMostrarEstadisticas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -489,7 +561,7 @@ session_start();
 				         
 				      	<?php
 
-						require_once('./consultas/SelectBusetas.php');
+						
 
 						?>
 				        
@@ -497,43 +569,19 @@ session_start();
 								  <thead>
 								    <tr>
 								      <th scope="col">Rutas</th>
-								      <th scope="col">Pasajeros</th>
-								      <th scope="col">Precio</th>
-								      <th scope="col">Mes</th>
 								      <th scope="col">Total</th>
+								      <th scope="col">Fecha</th>
+								      <th scope="col">Impresion</th>
 								      
 								      
 								    </tr>
 								  </thead>
 								  <tbody>
-								  	<!-- HAY QUE VALIDAR QUE LA BUSETA TENGA PLACA UNICA -->
+								  	
 								    <tbody>
-										<!-- <?php foreach ($Busetas as  $buseta): ?> -->
-								<tr>
-									 
-									<td> <!-- <?php echo $buseta[ 'Marca']  ?> --> Sincelejo - Sucre</td> 
-									<td> 15<!-- <?php echo $buseta[ 'Modelo']  ?> --></td> 	
-									<td> 50.000<!-- <?php echo $buseta[ 'Placa']  ?> --></td> 	
-									<td> Enero<!-- <?php echo $buseta[ 'Color']  ?> --></td> 	
-									<td> 750.000<!-- <?php echo $buseta[ 'Color']  ?> --></td> 	
-									
-									
-									<!-- <td>
-								                     <a href="./Consultas/Eliminarbuseta.php?accion=<?php echo $buseta['Placa']; ?>"
-								                        >        
-								                        <i class="fas fa-trash-alt text-danger"> Eliminar</i>
-								                    </a>
-								    </td>
-								                 
-								                <td>
-								                    <a href="./Consultas/EditarBusetas.php?accion=<?php echo $buseta['Placa']; ?>">
-								                    
-								                       <i class="fas fa-sync text-success"> Editar </i>
-								                        
-								                    </a>
-								                </td> -->
-									</tr>
-									<!-- <?php endforeach; ?>  -->
+										<tr>
+											<td> Nombre</td>
+										</tr>
 
 									 </tbody>
 								  </tbody>
@@ -568,9 +616,10 @@ require_once('./Consultas/SelectUser.php');
 
 		<caption>Usuarios</caption>
 		<th>Usuario</th>
-		<th>Password</th>
 		<th>Nombre</th>
-		<th>Identificacion</th>
+		<th>Apellido</th>
+		<th>Correo</th>
+		<th>Password</th>
 		<th>Telefono</th>
 		<th>Direccion</th>
 		<th>Rol</th>
@@ -584,23 +633,25 @@ require_once('./Consultas/SelectUser.php');
 <tr>
 	 
 	<td> <?php echo $registro[ 'Id_Usuarios']  ?></td> 	
+	<td> <?php echo $registro[ 'Nombre']  ?></td>
+	<td> <?php echo $registro[ 'Apellido']  ?></td>	
+	<td> <?php echo $registro[ 'Correo']  ?></td> 	
 	<td> <?php echo $registro[ 'Password']  ?></td> 	
-	<td> <?php echo $registro[ 'Nombre']  ?></td> 	
-	<td> <?php echo $registro[ 'Correo']  ?></td> 
 	<td> <?php echo $registro[ 'Telefono']  ?></td> 
 	<td> <?php echo $registro[ 'Direccion']  ?></td> 
 	<td> <?php echo $registro[ 'Rol']  ?></td> 
 	<td >
-                     <a href="./Consultas/EliminarUser.php?accion=<?php echo $registro['Usuario']; ?>"
-                       Style="Color:red; text-decoration: none" >        
-                        <i class="fas fa-trash-alt"></i>Eliminar</a>
+                     <a href="./Consultas/EliminarUser.php?accion=<?php echo $registro['Id_Usuarios']; ?>"
+                        >        
+                        <i class="fas fa-trash-alt text-danger">Eliminar</i></a>
+                        <!-- <i class="fas fa-trash-alt text-danger"> Eliminar</i> -->
                 </td>
                  
                 <td>
-                    <a href="./Consultas/Editado.php?accion=<?php echo $registro['Usuario']; ?>">
+                    <a href="./Consultas/Editado.php?accion=<?php echo $registro['Id_Usuarios']; ?>">
                     
-                       <i class="fas fa-sync"></i>
-                        Editar
+                       <i class="fas fa-sync-alt  text-success">Editar</i>
+                        
                     </a>
                 </td>
 	</tr>

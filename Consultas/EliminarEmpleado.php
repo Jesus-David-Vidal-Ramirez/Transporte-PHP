@@ -1,28 +1,44 @@
 <?php
 require_once'../Conexiones/conexion.php';
 
+session_start();
+    if(!isset($_SESSION['Usuario'])):
+    
+?>
+<script>
+  alert("Acceso denegado ");
+  window.location.href="../index.php";
+</script>
 
-$Empleado=$_GET["accion"];
+<?php
+
+    endif;
+
+?>
+
+
+<?php
 
 
 
-$sql="DELETE from Empleados WHERE Identificacion=:accion";
 
-$stmt=$pdo->prepare($sql);
+	$Empleado=$_GET["accion"];
 
+	$sql="DELETE from Empleados WHERE Id_Empleados=:accion";
 
-	if ($stmt->execute([
-	':accion'=>$Empleado
-	
-		]));
-	
-{
-	echo "<script> alert('Eliminado ');
-	window.location.href='../Acceso.php';
-</script>" ;
+	$stmt=$pdo->prepare($sql);
 
-	
-	
-}
+		if ($stmt->execute([
+		':accion'=>$Empleado
+		
+			]));
+		
+	{
+		echo "<script> alert('Eliminado ');
+		window.location.href='../Acceso.php';
+	</script>" ;
+		
+	}
+
 
 ?>

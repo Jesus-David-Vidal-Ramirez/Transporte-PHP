@@ -42,3 +42,37 @@ function ocultarCorreo(){
   valorBoton =! valorBoton;
 
 }
+
+//BOTON RESERVAR PARA LLEGAR A RESERVAS  y no perderse el dato
+function Reservas(){
+//const botonReservar =  document.getElementsByClassName('Reservar')[0].value;
+const botonReservar =  document.getElementById('reservar');
+console.log(botonReservar);
+alert('alerta' + botonReservar)
+let IdRuta = null;
+		botonReservar.addEventListener("click", function(evento){
+		
+		let iniciarsesion = document.querySelector('#iniciarSesion').setAttribute("name","Reservar");
+	  IdRuta   = document.querySelector('#reservar').value;
+	  console.log('idRUta ' + IdRuta);
+	  let referencia = document.querySelector('#referencia').value;
+	  referencia = IdRuta.value; 
+	  console.log(referencia );
+		alert("Le has dado click reservar " + referencia + " referencia" );
+		
+	});
+}
+
+//BOTON COMPRAR PARA LLEGAR A COMPRAR y no perderse el dato Sin implementar
+function Compras(){
+const botonComprar = document.querySelector("#comprar");
+	botonComprar.addEventListener("click", function(evento){
+	
+	let Compra = document.querySelector('#iniciarSesion').setAttribute("name","Comprar");
+
+	alert("Le has dado click comprar " + Compra);
+	
+});
+
+}
+

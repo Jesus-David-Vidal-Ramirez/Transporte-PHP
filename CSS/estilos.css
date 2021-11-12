@@ -84,7 +84,12 @@ background-image: linear-gradient(180deg, #dcf1ff 0%, #80f9e3 100%);
 	 background-image: linear-gradient(0deg, #dcf1ff 0%, #80f9e3 100%);
 }
 
+/* ----------------------------------------- Fondos de editados----------------------------*/
+.editado{
+background-color: #dcf1ff;
+background-image: linear-gradient(180deg, #dcf1ff 0%, #80f9e3 100%);
 
+}
 
 /* ----------------------------------------- Media de las cartas de las rutas----------------------------*/
 @media screen and (min-width: 768px) and (max-width: 1000px) { 
@@ -96,6 +101,40 @@ background-image: linear-gradient(180deg, #dcf1ff 0%, #80f9e3 100%);
 
  }
 
+
+
+@media screen and (min-width: 768px) and (max-width: 1000px) { 
+
+  .rutas{
+  	width: 50%;
+  	
+  }
+
+ }
+
+
+@media screen and (max-width: 768px) and (min-width: 320px) { 
+
+  .iniciarSesion{
+  	padding: 4px;
+
+  }
+
+  .fas{
+  	margin-right: 20px;
+
+  } 
+  
+ }
+ 
+@media screen and (min-width: 1000px) { 
+
+  .iniciarSesion{
+		margin-right: 50px;
+	}
+
+ }
+ 
 
 
 

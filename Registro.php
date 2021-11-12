@@ -27,26 +27,31 @@
         </div>
         <div >
             <label for="Usuario" class="form-label labelRegistro">Usuario</label>
-            <input type="text" name="Usuario" class="form-control inputRegistro" id="exampleInputEmail1" aria-describedby="emailHelp" required="true">
+            <input type="number" name="Usuario" class="form-control inputRegistro" id="exampleInputEmail1" aria-describedby="emailHelp" required="true">
         </div>
-        <div>
-            <label for="password" class="form-label labelRegistro">Password</label>
-            <input type="password" name="Password" class="form-control inputRegistro" id="password" required="true">
-        </div>
+
         <div>
             <label for="password" class="form-label labelRegistro">Nombre</label>
             <input type="text" name="Nombre" class="form-control inputRegistro" id="password" required="true">
         </div>
 
         <div class="mb-3">
-            <label for="Cedula" class="form-label labelRegistro">Cedula Ciudadana</label>
-            <input type="number"  name="Identificacion" class="form-control inputRegistro" id="cedula" required="true">
+            <label for="Apellido" class="form-label labelRegistro">Apellido</label>
+            <input type="text"  name="Apellido" class="form-control inputRegistro" id="Apellido" required="true">
         </div>
-        <!-- No se pide el Email ya que el usuario es email
+        
+
+        <div>
+            <label for="password" class="form-label labelRegistro">Contraseña</label>
+            <input type="password" name="Password" class="form-control inputRegistro" id="password" required="true">
+        </div>
+      
         <div class="mb-3">
-            <label for="Email" class="form-label">Email</label>
-            <input type="email" name="Correo" class="form-control" id="email" required="true">
-        </div> -->
+            <label for="Correo" class="form-label labelRegistro">Correo</label>
+            <input type="email"  name="Correo" class="form-control inputRegistro" id="Correo" required="true">
+        </div>
+        
+
         <div class="mb-3">
             <label for="Telefono" class="form-label labelRegistro">Telefono</label>
             <input type="tel" name="Telefono" class="form-control inputRegistro" id="telefono" required="true">
@@ -57,19 +62,21 @@
             <input type="text" class="form-control inputRegistro" id="direccion" name="Direccion" required="true">
         </div>
         <!--Validar que solo acepte imagenes -->
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="formFile" class="form-label labelRegistro">Ingresar Imagen</label>
             <input class="form-control inputRegistro" type="file" id="formFile">
-        </div>
+        </div> -->
         <div class="mb-3">
-            <!-- <label for="formFile" class="form-label">Rol</label> -->
-            <input class="form-control" type="hidden" value="2" name="Rol" id="formFile">
+            <input class="form-control" type="hidden" value="USER" name="Rol" id="formFile">
         </div>
-        <button type="submit" class="btn btn-outline-dark w-100 p-3 mt-3 text-uppercase">Registrar</button>
+        <button type="submit" class="btn btn-outline-dark w-100 p-3 mt-3 text-uppercase" name="RegistroUser">Registrar</button>
 
     </form>
 </div>
+ 
+       
 
+    
 
 	
 

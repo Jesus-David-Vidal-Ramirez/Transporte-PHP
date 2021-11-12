@@ -78,13 +78,13 @@ session_start();
 	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	        <li class="nav-item ">
-	          <a class="nav-link " aria-current="page" href="#Inicio">Inicio</a>
+	          <a class="nav-link " aria-current="page" href="AccesoUser.php#Inicio">Inicio</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="#Destinos">Nuestras Rutas</a>
+	          <a class="nav-link" href="AccesoUser.php#Destinos">Nuestras Rutas</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="#Contactos">Contactos</a>
+	          <a class="nav-link" href="AccesoUser.php#Contactos">Contactos</a>
 	        </li>
 	      </ul>
 
@@ -111,6 +111,84 @@ session_start();
 
 
 <!-------------- Contenido-------------->
+
+
+
+	<section class="">
+		<?php
+		$ID =-- $_GET["identificación"];
+		
+
+		require_once('./Consultas/SelectRutas.php');
+
+		if(empty($rutas[$_GET["identificación"]])){
+			echo '<div class="alert alert-danger m-5 justify-content-between d-flex"  role="alert">
+  Ruta no encontrada!
+  	<a href="./AccesoUser.php" class="btn btn-outline-danger "> Regresar </a>
+</div>';
+		}else{
+
+			//echo print_r($rutas[$_GET["identificación"]]) . '<br>';
+			//echo $_SESSION['Usuario'] ;
+			?>
+			<div class="row row-cols-1 row-cols-md-3 g-4  m-2 justify-content-center">
+				<div class="col rutas">
+					<div class="card">
+						<img src="Imagenes/<?php echo $rutas[$ID]['Imagen'] ?>" class="card-img-top" alt="<?php echo $ruta[$ID][ 'Imagen']  ?>" width="1200px" height="310px">
+						<div class="card-body">
+							<h5 class="card-title"> <?php echo $rutas[$ID]['Nombre'] ?> </h5>
+							<p class="card-text">
+								<?php echo $rutas[$ID]['Informacion']  ?>
+							</p>
+
+						</div>
+						<div class="card-footer d-flex justify-content-between"   >
+							<?php
+							$fecha = date('y-m-d');
+							if(isset($rutas[$ID]['Placa'])){
+								echo $rutas[$ID]['Placa']; 	
+
+							}else{
+							 	echo '<label>BUS: Sin Asignar</label>';
+							 
+
+							}?>
+							<form action="./Consultas/InsertarDetalleVenta.php" method="post">
+								<label>Cantidad</label>
+								<input type="number" name="Cantidad" min="1" required="">								
+								<input type="text" name="Tipo" value="Compra" hidden="">
+
+								<!-- <input type="hidden" name="Id_venta"  value="<?php echo $rutas[$ID]['Id'] ?>"> -->
+								<input type="hidden" name="Id_Ruta"  value="<?php echo $rutas[$ID]['Id_Rutas'] ?>">
+								<input type="hidden" name="Id_Usuarios"  value="<?php echo $_SESSION['Usuario'] ?>">
+								<input type="hidden" name="Precio"  value="<?php echo $rutas[$ID]['Precio'] ?>">
+								<input type="hidden" name="NombreRuta"  value="<?php echo $rutas[$ID]['Nombre'] ?>">
+								<input type="hidden" name="Fecha"  value="<?php echo $fecha ?> ">
+								<input type="hidden" name="Compra"  value="Compra">
+								<input type="hidden" name="Reserva"  value="">
+
+
+						</div>
+						<?php 
+							if($rutas[$ID]['Placa'] == ''){
+								
+								echo '<input  name="reservas" class="btn btn-outline-danger d-block" value="No Disponible"> '	;
+							}else{
+								echo '<input type="submit" name="enviar" value="Comprar" class="btn btn-outline-danger d-block">';	
+							}
+						?>
+													</form>
+					</div>
+				</div>
+
+			</div>
+      <?php	
+		}
+		?>
+
+
+
+	</section>
 
 <!-------------- FIN Contenido-------------->
 

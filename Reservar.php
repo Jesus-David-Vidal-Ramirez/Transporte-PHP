@@ -89,13 +89,13 @@ session_start();
 	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	        <li class="nav-item ">
-	          <a class="nav-link " aria-current="page" href="#Inicio">Inicio</a>
+	          <a class="nav-link " aria-current="page" href="AccesoUser.php">Inicio</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="#Destinos">Nuestras Rutas</a>
+	          <a class="nav-link" href="AccesoUser.php#Destinos">Nuestras Rutas</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="#Contactos">Contactos</a>
+	          <a class="nav-link" href="AccesoUser.php#Contactos">Contactos</a>
 	        </li>
 	       
 	      </ul>
@@ -152,8 +152,7 @@ session_start();
 
 							}else{
 							 	echo '<label>BUS: Sin Asignar</label>';
-							 	 
-							 	 
+							 
 
 							}?>
 							<form action="./Consultas/InsertarDetalleVenta.php" method="post">
@@ -167,15 +166,16 @@ session_start();
 								<input type="hidden" name="Precio"  value="<?php echo $rutas[$ID]['Precio'] ?>">
 								<input type="hidden" name="NombreRuta"  value="<?php echo $rutas[$ID]['Nombre'] ?>">
 								<input type="hidden" name="Fecha"  value="<?php echo $fecha ?> ">
-
+								<input type="hidden" name="Reserva"  value="Reserva">
+								<input type="hidden" name="Compra"  value="">
 
 						</div>
 						<?php 
 							if($rutas[$ID]['Placa'] == ''){
 								
-								echo '<input  name="reservas" class="btn btn-outline-danger d-block" value="No Disponible"> disable'	;
+								echo '<input  name="reservas" class="btn btn-outline-danger d-block" value="No Disponible"> '	;
 							}else{
-								echo '<input type="submit" name="reservas" class="btn btn-outline-danger d-block">';	
+								echo '<input type="submit" name="enviar" value="Reservar" class="btn btn-outline-warning d-block">';	
 							}
 						?>
 													</form>

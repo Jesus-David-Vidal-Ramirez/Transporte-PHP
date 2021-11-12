@@ -10,9 +10,12 @@ if(isset($_POST['buseta'])){
 	$Marca=$_POST["Marca"];
 	$Modelo=$_POST["Modelo"];
 	$Color=$_POST["Color"];
+	$IdConductor=$_POST["IdConductor"];
+	$TecnoMecanica=$_POST["TecnoMecanica"];
+	$Seguro=$_POST["Seguro"];
 
-	$sql = "INSERT INTO Busetas (Placa, Marca, Modelo, Color ) VALUES (
-				:Placa, :Marca, :Modelo, :Color)";
+	$sql = "INSERT INTO Busetas (Placa, Marca, Modelo, Color,Seguro,TecnoMecanica,IdConductor ) VALUES (
+				:Placa, :Marca, :Modelo, :Color, :Seguro , :TecnoMecanica, :IdConductor)";
 
 	$stmt=$pdo->prepare($sql);
 
@@ -21,6 +24,9 @@ if(isset($_POST['buseta'])){
 		':Marca'=>$Marca,
 		':Modelo'=>$Modelo,
 		':Color'=> $Color,
+		':Seguro'=> $Seguro,
+		':TecnoMecanica'=>$TecnoMecanica,
+		 ':IdConductor'=>$IdConductor
 		]))
 	{
 		echo "<script> alert('Se guardó la buseta con exito ');

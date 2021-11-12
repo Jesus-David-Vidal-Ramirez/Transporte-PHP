@@ -1,6 +1,6 @@
 <?php
 
-$bd="logina1";
+
 $bd="senatransporte";
 // $bd="logina1";
 $usuario='root';

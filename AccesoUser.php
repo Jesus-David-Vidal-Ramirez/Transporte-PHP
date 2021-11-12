@@ -23,12 +23,15 @@ session_start();
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Transporte</title>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+		
+ 	
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
  		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
- 		<link rel="stylesheet" type="text/css" href="./CSS/estilos.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/estilos.css">
 </head>
 <body>
-							   
+							 
+   
 <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4" id="Inicio">
 
   <div class="container-fluid ">
@@ -38,54 +41,172 @@ session_start();
 	    <?php 
         echo $_SESSION['Correo'];
        //echo $_SESSION['Usuario']  ?>
-      
-
-
-
 	  </button>
           
 	  <ul class="dropdown-menu" >
 	    <li class="Reservas" data-bs-toggle="modal" data-bs-target="#Reservas"><a class="dropdown-item" href="#" >Reservas</a></li>
-	    <li class="Compras" data-bs-toggle="modal" data-bs-target="#Compras" ><a class="dropdown-item" href="#">Compras</a></li>
+	    <li class="Compras" data-bs-toggle="modal" data-bs-target="#Compras"><a class="dropdown-item" href="#">Compras</a></li>
 	    <li class="Cerrar"  ><a class="dropdown-item" href="logout.php">Cerrar Session</a></li>
-	   
 	  </ul>
 	</div>
-
-
-
-
+<div>
 <!-- Modal Reservas -->
 <div class="modal fade " id="Reservas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content ">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Reservas</h5>
-             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+        <h5 class="modal-title mx-auto text-uppercase" id="exampleModalLabel">Reservas</h5>
+             <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button> -->
       </div>
-	      <div class="modal-body">     
-	      	Salieron las reservas
-	      </div>
+        <div class="modal-body table-responsive">     
+          <?php
+                require_once './Conexiones/conexion.php';
+                $Id_Usuario = $_SESSION['Usuario'];
+
+                                
+                $sql = "SELECT * FROM detalleventas WHERE Id_usuarios = '$Id_Usuario' AND Tipo = 'Reserva' ORDER BY NombreRuta, Id_Usuarios DESC ";
+
+                $stmt = $pdo -> prepare($sql);
+                $stmt ->setFetchMode(PDO::FETCH_ASSOC);
+                $stmt->execute();
+                $reservas=$stmt->fetchAll();
+                //echo print_r($compras);
+
+            ?>  
+                
+                <table class="table table-hover text-center">
+                  <thead>
+                    <tr>
+                      <th scope="col">Id_Venta</th>
+                      <th scope="col">Id_Ruta</th>
+                      <th scope="col">Id_Usuario</th>
+                      <th scope="col">Cantidad</th>
+                      <th scope="col">Precio</th>
+                      <th scope="col">Total</th>
+                      <th scope="col">Ruta</th>
+                      <th scope="col">Fecha</th>
+                      <th colspan="2">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                    
+                    <?php 
+
+
+                    foreach ($reservas as  $Reservas): ?>
+                <tr>
+                   
+                  <td> <?php echo $Reservas[ 'Id_Venta']  ?></td> 
+                  <td> <?php echo $Reservas[ 'Id_Rutas']  ?></td> 
+                  <td> <?php echo $Reservas[ 'Id_Usuarios']  ?></td> 
+                  <td> <?php echo $Reservas[ 'Cantidad']  ?></td> 
+                  <td> <?php echo $Reservas[ 'Precio']  ?></td> 
+                  <td> <?php echo $Reservas[ 'Total']  ?></td> 
+                  <td> <?php echo $Reservas[ 'NombreRuta']  ?></td> 
+                  <td> <?php echo $Reservas[ 'Fecha']  ?></td> 
+
+                  <td>
+                    <a href="./Consultas/EliminarReservas.php?accion=<?php echo $Reservas['Id_Venta']; ?>">
+                      <i class="fas fa-trash-alt text-danger"> Eliminar</i>
+                    </a>
+                  </td>
+                 <!--  <td>
+                          <a href="./Consultas/EditarReservass.php?accion=<?php echo $Reservas['Id_Venta']; ?>">
+                             <i class="fas fa-sync text-success"> Editar </i>
+                          </a>
+                  </td> -->
+                  </tr>
+                  <?php endforeach; ?> 
+                  </tbody>
+                  
+                </table>
+        </div>
       </div> 
     </div>
   </div>
+
 
 <!-- Modal Compras-->
-<div class="modal fade " id="Compras" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="modal fade" id="Compras" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Compras</h5>
-             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+        <h5 class="modal-title text-uppercase mx-auto" id="exampleModalLabel">Compras</h5>
+             <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button> -->
       </div>
-	      <div class="modal-body">     
-	      	Salieron las Compras
-	      </div>
+        <div class="modal-body table-responsive">     
+            <?php
+                require_once './Conexiones/conexion.php';
+                $Id_Usuario = $_SESSION['Usuario'];
+
+                                
+                $sql = "SELECT * FROM detalleventas WHERE Id_usuarios = '$Id_Usuario' AND Tipo = 'Compra' ORDER BY NombreRuta, Id_Usuarios DESC";
+
+                $stmt = $pdo -> prepare($sql);
+
+                $stmt ->setFetchMode(PDO::FETCH_ASSOC);
+                $stmt->execute();
+
+                $compras=$stmt->fetchAll();
+
+                //echo print_r($compras);
+
+            ?>  
+                
+                <table class="table table-hover text-center">
+                  <thead>
+                    <tr>
+                      <th scope="col">Id_Venta</th>
+                      <th scope="col">Id_Ruta</th>
+                      <th scope="col">Id_Usuario</th>
+                      <th scope="col">Cantidad</th>
+                      <th scope="col">Precio</th>
+                      <th scope="col">Total</th>
+                      <th scope="col">Ruta</th>
+                      <th scope="col">Fecha</th>
+                      <!-- <th colspan="2">Acciones</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                    
+                    <?php foreach ($compras as  $Compras): ?>
+                <tr>
+                   
+                  <td> <?php echo $Compras[ 'Id_Venta']  ?></td> 
+                  <td> <?php echo $Compras[ 'Id_Rutas']  ?></td> 
+                  <td> <?php echo $Compras[ 'Id_Usuarios']  ?></td> 
+                  <td> <?php echo $Compras[ 'Cantidad']  ?></td> 
+                  <td> <?php echo $Compras[ 'Precio']  ?></td> 
+                  <td> <?php echo $Compras[ 'Total']  ?></td> 
+                  <td> <?php echo $Compras[ 'NombreRuta']  ?></td> 
+                  <td> <?php echo $Compras[ 'Fecha']  ?></td> 
+                  <!-- <td>
+                    <a href="./Consultas/EliminarCompras.php?accion=<?php echo $Compras['Id_Venta']; ?>">      
+                      <i class="fas fa-trash-alt text-danger"> Eliminar</i>
+                    </a>
+                  </td>
+                  <td>
+                    <a href="./Consultas/EditarComprass.php?accion=<?php echo $Compras['Id_Venta']; ?>">
+                      <i class="fas fa-sync text-success"> Editar </i>
+                    </a>
+                  </td> -->
+                  </tr>
+                  <?php endforeach; ?> 
+
+                   
+                  </tbody>
+                  
+                </table>
+        </div>
       </div> 
     </div>
   </div>
 
 
+
+</div>
   	<i class="fas fa-bus"></i>
     
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -109,6 +230,8 @@ session_start();
   </div>
 </nav>
 
+
+<!-- OLADA RIKLINSUS -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
    <text x="680" y="100" font-size="4em" font-weight="2em" letter-spacing="1em">RIKLINSUS</text>
   <path fill="#0099ff" fill-opacity="1" d="M0,32L30,48C60,64,120,96,180,96C240,96,300,64,360,58.7C420,53,480,75,540,122.7C600,171,660,245,720,245.3C780,245,840,171,900,165.3C960,160,1020,224,1080,250.7C1140,277,1200,267,1260,250.7C1320,235,1380,213,1410,202.7L1440,192L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path>
@@ -116,7 +239,7 @@ session_start();
 
 
 
-<!--Contenido o section -->
+<!--Contenido RUTAS -->
 <div class="p-4" id="Destinos">
   <h1 class="title ">
   	Destinos mas buscados
@@ -239,6 +362,9 @@ require_once('./Consultas/SelectRutas.php');
       <label name="Asunto" class="mt-2 labelCorreo">Correo</label>
       <input type="email" name="Correo" value="<?php echo $_SESSION['Correo'];?>" placeholder="TuCorreo@gmail.com" class="mt-2 w-100" required=""><br>
 
+     <!--  <label name="Telefono" class="mt-2 labelCorreo">Telefono</label>
+      <input type="number" name="Correo"  placeholder="3012331844" min="7" max="10"  class="mt-2 w-100" required=""><br>
+ -->
       <label class="mt-2 labelCorreo">Mensaje</label><br>
       <textarea name="Mensaje" class="mt-2 w-100" rows="6"  required=""></textarea><br>
 
@@ -296,8 +422,7 @@ require_once('./Consultas/SelectRutas.php');
 
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
- 
 	<script src="https://kit.fontawesome.com/247d2323bf.js" crossorigin="anonymous"></script>	
-  <script type="text/javascript" src="script.js"></script>
+  
 </body>
 </html>

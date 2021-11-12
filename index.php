@@ -11,7 +11,10 @@ session_start();
 
 	<title>Transporte</title>
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" 
+  integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- FONT AWESONME -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./CSS/estilos.css">  
  <!--AOS <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">-->
@@ -31,7 +34,8 @@ session_start();
 
       <div class="container-fluid ">
       			<!-- Button trigger modal -->
-    <button type="button" id="iniciarsesion" class="btn btn-primary me-5 text-capitalize" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="mostrar()">
+    <button type="button"  class="iniciarSesion btn btn-primary text-capitalize " data-bs-toggle="modal" data-bs-target="#exampleModal" >
+      <!-- onclick="mostrar" queria que hiciera un focus en los campos error al perder el foco cuando abre el modal -->
       iniciar sesi&oacute;n
     </button>
 
@@ -57,12 +61,17 @@ session_start();
     		    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
     		    <input type="Password" name="Password" class="form-control" id="exampleInputPassword1" required="" placeholder="Contraseña">
     		  </div>
+          <input type="hidden" value="" name="referencia" id="referencia">
       <!-- <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
       </div> -->
       <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-      <button type="submit" class="btn btn-primary text-capitalize">iniciar sesi&oacute;n</button><br>
+      <button type="submit" class="btn btn-primary text-capitalize" id="iniciarSesion" name="iniciarSesion">
+      iniciar sesi&oacute;n
+      </button>
+
+      <br>
     </form>
 
           </div>
@@ -108,7 +117,7 @@ session_start();
 
 
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-       <text x="680" y="100" font-size="4em" font-weight="2em" letter-spacing="1em">RIKLINSUS</text>
+       <text x="600" y="100" font-size="4em" font-weight="2em" letter-spacing="1em">RIKLINSUS</text>
       <path fill="#0099ff" fill-opacity="1" d="M0,32L30,48C60,64,120,96,180,96C240,96,300,64,360,58.7C420,53,480,75,540,122.7C600,171,660,245,720,245.3C780,245,840,171,900,165.3C960,160,1020,224,1080,250.7C1140,277,1200,267,1260,250.7C1320,235,1380,213,1410,202.7L1440,192L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path>
     </svg>  
 
@@ -143,14 +152,18 @@ require_once('./Consultas/SelectRutas.php');
        
       </div>
       <div class="card-footer d-flex justify-content-between"   >
-        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Comprar</button>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" name="comprar" id="comprar">Comprar</button>
         <strong calss="pl-2"><?php echo $ruta[ 'Precio']  ?></strong>
         
-       <button class="btn btn-warning align-items-start" data-bs-toggle="modal" data-bs-target="#exampleModal">Reservar</button>
+       <button class="Reservar btn btn-warning align-items-start" data-bs-toggle="modal" data-bs-target="#exampleModal" name="reservar" id="reservar"    >Reservar</button>
+       
       </div>
     </div>
   </div>
-  <?php endforeach; ?> 
+  <?php endforeach; 
+
+  
+  ?> 
 </div>
 
 
@@ -251,17 +264,17 @@ require_once('./Consultas/SelectRutas.php');
     
 </div>
 
+
+
+<a href="pdf.php" target="_black"> reporte </a>
+
+
 <hr>
-
-
-
-
-
-<hr>
+<script type="text/javascript" src="script.js"> </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
 
-<script type="text/javascript" src="script.js"> </script>
+
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script> -->

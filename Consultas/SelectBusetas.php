@@ -4,6 +4,7 @@
  
 require_once'./Conexiones/conexion.php';
 
+
 $sql = "SELECT * FROM Busetas";
 
 $stmt = $pdo->prepare($sql);
